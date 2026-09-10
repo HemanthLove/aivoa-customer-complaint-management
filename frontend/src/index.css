@@ -1,0 +1,552 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+
+  color: #172033;
+  background: #f4f6f9;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  min-width: 1100px;
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  background: #f4f6f9;
+}
+
+.app-header {
+  height: 76px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border-bottom: 1px solid #e3e7ed;
+}
+
+.brand {
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #18233a;
+}
+
+.subtitle {
+  margin-top: 3px;
+  color: #7b8494;
+  font-size: 13px;
+}
+
+.status-badge,
+.online-badge,
+.ai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.status-badge {
+  padding: 8px 13px;
+  color: #876315;
+  background: #fff8df;
+  border: 1px solid #f1e1a9;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #d6a529;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: 1.35fr 0.95fr;
+  gap: 20px;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.complaint-panel,
+.copilot-panel {
+  background: #ffffff;
+  border: 1px solid #e0e5eb;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(20, 32, 52, 0.04);
+}
+
+.complaint-panel {
+  padding: 28px;
+}
+
+.panel-header {
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  margin: 0 0 7px;
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 6px;
+  font-size: 24px;
+  color: #172033;
+}
+
+.panel-header p:last-child {
+  margin: 0;
+  color: #7c8798;
+  font-size: 13px;
+}
+
+.section-title {
+  margin: 25px 0 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #edf0f4;
+  color: #364256;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.field {
+  min-width: 0;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 7px;
+  color: #5d687a;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  border: 1px solid #dce2e9;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #273348;
+  outline: none;
+}
+
+.field input {
+  height: 40px;
+  padding: 0 12px;
+}
+
+.field textarea {
+  padding: 10px 12px;
+  resize: vertical;
+  line-height: 1.45;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: #a4acb8;
+}
+
+.full-width {
+  margin-top: 15px;
+}
+
+.risk-card {
+  margin-top: 26px;
+  padding: 20px;
+  border: 1px solid #e2e7ed;
+  border-radius: 11px;
+  background: #fafbfd;
+}
+
+.risk-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.risk-card h2 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.ai-badge {
+  padding: 5px 9px;
+  color: #5d45a8;
+  background: #f0ebff;
+}
+
+.risk-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.copilot-panel {
+  min-height: 760px;
+  display: flex;
+  flex-direction: column;
+}
+
+.copilot-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 22px;
+  border-bottom: 1px solid #e5e9ef;
+}
+
+.copilot-avatar {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  color: #ffffff;
+  background: #24324a;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.copilot-header h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.copilot-header p {
+  margin: 3px 0 0;
+  color: #8490a1;
+  font-size: 11px;
+}
+
+.online-badge {
+  margin-left: auto;
+  padding: 6px 10px;
+  color: #2f7651;
+  background: #edf8f1;
+}
+
+.chat-area {
+  flex: 1;
+  min-height: 500px;
+  padding: 25px 22px;
+  overflow-y: auto;
+  background: #fbfcfe;
+}
+
+.empty-chat {
+  max-width: 420px;
+  margin: 65px auto;
+  text-align: center;
+}
+
+.empty-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 17px;
+  border-radius: 13px;
+  color: #6450b8;
+  background: #eeeaff;
+  font-size: 22px;
+}
+
+.empty-chat h3 {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.empty-chat>p {
+  color: #788497;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.example-box {
+  margin-top: 22px;
+  padding: 14px;
+  text-align: left;
+  border: 1px solid #e2e7ee;
+  border-radius: 9px;
+  background: #ffffff;
+}
+
+.example-box span {
+  color: #697589;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.example-box p {
+  margin: 7px 0 0;
+  color: #455166;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.message {
+  max-width: 90%;
+  margin-bottom: 18px;
+}
+
+.message.user {
+  margin-left: auto;
+}
+
+.message-label {
+  margin-bottom: 5px;
+  color: #7c8797;
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.message-content {
+  padding: 12px 14px;
+  border: 1px solid #e0e5eb;
+  border-radius: 10px;
+  color: #344055;
+  background: #ffffff;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.message.user .message-content {
+  color: #ffffff;
+  background: #27354d;
+  border-color: #27354d;
+}
+
+.processing {
+  color: #68758a;
+}
+
+.chat-input-area {
+  padding: 17px;
+  border-top: 1px solid #e3e7ed;
+  background: #ffffff;
+}
+
+.chat-input-area textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dce2e9;
+  border-radius: 9px;
+  outline: none;
+  resize: none;
+  color: #273348;
+  background: #fbfcfd;
+  font-size: 13px;
+}
+
+.chat-input-area textarea:focus {
+  border-color: #9ba7b8;
+}
+
+.input-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.input-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.upload-button {
+  padding: 9px 12px;
+  border: 1px solid #dce2e9;
+  border-radius: 8px;
+  color: #4d596c;
+  background: #ffffff;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.upload-button:hover:not(:disabled) {
+  background: #f5f7fa;
+}
+
+.upload-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.file-name {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #7d8797;
+  font-size: 10px;
+}
+
+.input-footer span {
+  color: #8a94a3;
+  font-size: 10px;
+}
+
+.input-footer button {
+  padding: 10px 15px;
+  border: 0;
+  border-radius: 8px;
+  color: #ffffff;
+  background: #27354d;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.input-footer button:hover:not(:disabled) {
+  background: #1d293d;
+}
+
+.input-footer button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1150px) {
+  body {
+    min-width: 0;
+  }
+
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .copilot-panel {
+    min-height: 650px;
+  }
+}
+
+.completeness-card {
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px solid #dce2e9;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.completeness-score {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 8px 0 14px;
+}
+
+.score-number {
+  font-size: 24px;
+  font-weight: 700;
+  color: #24324a;
+}
+
+.score-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #687386;
+}
+
+.completeness-section {
+  margin-top: 12px;
+}
+
+.completeness-label {
+  margin-bottom: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #687386;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.completeness-section ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.completeness-section li {
+  margin: 5px 0;
+  font-size: 11px;
+  color: #3f4b5f;
+}
+
+.completeness-notes {
+  margin: 14px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid #edf0f3;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #687386;
+}
+
+.completeness-button {
+  padding: 9px 12px;
+  border: 1px solid #dce2e9;
+  border-radius: 8px;
+  color: #4d596c;
+  background: #fff;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.completeness-button:hover:not(:disabled) {
+  background: #f5f7fa;
+}
+
+.completeness-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
