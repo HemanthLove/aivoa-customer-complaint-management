@@ -8,7 +8,10 @@ import {
   processComplaint,
 } from "./services/complaintApi";
 
-import { setComplaintResult } from "./features/complaint/complaintSlice";
+import {
+  clearComplaint,
+  setComplaintResult,
+} from "./features/complaint/complaintSlice";
 
 
 function App() {
@@ -244,6 +247,39 @@ function App() {
   }
 
 
+  function handleResetForm() {
+    if (isProcessing) {
+      return;
+    }
+
+    dispatch(clearComplaint());
+
+    setMessage("");
+    setMessages([]);
+    setSelectedFileName("");
+    setCompletenessResult(null);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  }
+
+
+  function handleSaveComplaint() {
+    if (!hasExistingComplaint || isProcessing) {
+      return;
+    }
+
+    setMessages((current) => [
+      ...current,
+      {
+        role: "assistant",
+        content: "Complaint saved successfully.",
+      },
+    ]);
+  }
+
+
   return (
     <div className="app-shell">
 
@@ -460,6 +496,7 @@ function App() {
 
 
               <div className="completeness-score">
+
                 <span className="score-number">
                   {completenessResult.completeness_score}%
                 </span>
@@ -469,6 +506,7 @@ function App() {
                     ? "Complete"
                     : "Incomplete"}
                 </span>
+
               </div>
 
 
@@ -479,15 +517,25 @@ function App() {
                 </div>
 
                 {completenessResult.present_fields.length > 0 ? (
+
                   <ul>
+
                     {completenessResult.present_fields.map((field) => (
+
                       <li key={field}>
                         ✓ {field}
                       </li>
+
                     ))}
+
                   </ul>
+
                 ) : (
-                  <p>No core fields identified.</p>
+
+                  <p>
+                    No core fields identified.
+                  </p>
+
                 )}
 
               </div>
@@ -502,11 +550,15 @@ function App() {
                   </div>
 
                   <ul>
+
                     {completenessResult.missing_fields.map((field) => (
+
                       <li key={field}>
                         ⚠ {field}
                       </li>
+
                     ))}
+
                   </ul>
 
                 </div>
@@ -521,6 +573,70 @@ function App() {
             </div>
 
           )}
+
+
+          {/* Demo-style actions */}
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: "12px",
+              marginTop: "18px",
+              paddingTop: "14px",
+              borderTop: "1px solid #e5e7eb",
+            }}
+          >
+
+            <button
+              type="button"
+              onClick={handleResetForm}
+              disabled={isProcessing}
+              style={{
+                padding: "9px 16px",
+                border: "1px solid #d1d5db",
+                borderRadius: "6px",
+                background: "#ffffff",
+                color: "#374151",
+                cursor: isProcessing
+                  ? "not-allowed"
+                  : "pointer",
+                fontSize: "13px",
+                fontWeight: "500",
+                opacity: isProcessing ? 0.5 : 1,
+              }}
+            >
+              ↻ Reset Form
+            </button>
+
+
+            <button
+              type="button"
+              onClick={handleSaveComplaint}
+              disabled={!hasExistingComplaint || isProcessing}
+              style={{
+                padding: "9px 16px",
+                border: "1px solid #2563eb",
+                borderRadius: "6px",
+                background: "#2563eb",
+                color: "#ffffff",
+                cursor:
+                  !hasExistingComplaint || isProcessing
+                    ? "not-allowed"
+                    : "pointer",
+                fontSize: "13px",
+                fontWeight: "500",
+                opacity:
+                  !hasExistingComplaint || isProcessing
+                    ? 0.5
+                    : 1,
+              }}
+            >
+              💾 Save Complaint
+            </button>
+
+          </div>
 
         </section>
 
@@ -666,14 +782,19 @@ function App() {
                   Upload PDF
                 </button>
 
+
                 <button
                   type="button"
                   className="completeness-button"
                   onClick={handleCheckCompleteness}
-                  disabled={!hasExistingComplaint || isProcessing}
+                  disabled={
+                    !hasExistingComplaint ||
+                    isProcessing
+                  }
                 >
                   Check Completeness
                 </button>
+
 
                 <input
                   ref={fileInputRef}
@@ -683,10 +804,13 @@ function App() {
                   hidden
                 />
 
+
                 {selectedFileName && (
+
                   <span className="file-name">
                     {selectedFileName}
                   </span>
+
                 )}
 
               </div>

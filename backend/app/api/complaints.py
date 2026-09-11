@@ -8,7 +8,10 @@ from app.agents.edit_graph import edit_graph
 from app.database.database import get_db
 from app.schemas.completeness import ComplaintCompletenessResult
 from app.schemas.complaint import ComplaintAIResult
-from app.services.complaint_service import save_complaint, update_complaint
+from app.services.complaint_service import (
+    save_complaint,
+    update_complaint,
+)
 from app.services.pdf_extractor import extract_text_from_pdf
 
 
@@ -29,6 +32,11 @@ class ComplaintEditRequest(BaseModel):
 
 class ComplaintCompletenessRequest(BaseModel):
     current_complaint: ComplaintAIResult
+
+
+class ComplaintSaveRequest(BaseModel):
+    complaint: ComplaintAIResult
+    source_type: str = "text"
 
 
 @router.post(
@@ -115,6 +123,24 @@ async def extract_document(
     )
 
     return complaint_result
+
+
+@router.post(
+    "/save",
+    response_model=ComplaintAIResult,
+)
+def save_complaint_endpoint(
+    request: ComplaintSaveRequest,
+    db: Session = Depends(get_db),
+):
+    updated_complaint = update_complaint(
+        db=db,
+        result=request.complaint,
+        original_complaint=request.complaint,
+        source_type=request.source_type,
+    )
+
+    return request.complaint
 
 
 @router.post(

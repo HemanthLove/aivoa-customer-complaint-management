@@ -45,14 +45,13 @@ def update_complaint(
     db: Session,
     result: ComplaintAIResult,
     original_complaint: ComplaintAIResult,
+    source_type: str = "edit",
 ) -> Complaint:
     complaint_data = result.complaint
     risk_data = result.risk_assessment
 
     original_data = original_complaint.complaint
 
-    # Find the existing complaint using its original
-    # identifying information.
     complaint = (
         db.query(Complaint)
         .filter(
@@ -64,16 +63,13 @@ def update_complaint(
         .first()
     )
 
-    # If the original complaint cannot be found,
-    # create it as a new record instead of failing.
     if complaint is None:
         return save_complaint(
             db=db,
             result=result,
-            source_type="edit",
+            source_type=source_type,
         )
 
-    # Update the existing record.
     complaint.customer_name = complaint_data.customer_name
     complaint.customer_source = complaint_data.customer_source
     complaint.product_name = complaint_data.product_name
@@ -94,7 +90,7 @@ def update_complaint(
     complaint.recommended_action = risk_data.recommended_action
     complaint.risk_rationale = risk_data.rationale
 
-    complaint.source_type = "edit"
+    complaint.source_type = source_type
 
     db.commit()
     db.refresh(complaint)
